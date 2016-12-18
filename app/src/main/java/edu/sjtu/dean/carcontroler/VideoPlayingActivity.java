@@ -52,7 +52,7 @@ public class VideoPlayingActivity extends AppCompatActivity {
 
     public  void startRtsp() {
         // group owner's address
-        String vUrl = "rtsp://192.168.49.1:7878/?h264=1500-20-1280-720&videoapi=mc2";
+        String vUrl = "rtsp://192.168.49.1:7878/?h264=1500-20-1280-720&videoapi=mc";
 
         try {
             getWindow().setFormat(PixelFormat.TRANSLUCENT);
@@ -100,6 +100,10 @@ public class VideoPlayingActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ExampleActivity.class);
             startActivity(intent);
             return true;
+        } else if (id == R.id.action_facedetect) {
+            vv.stopPlayback();
+            Intent intent = new Intent(this, FaceDetectActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

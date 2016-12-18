@@ -12,4 +12,9 @@
         android:orderInCategory="100"
         android:title="Example"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_facedetect"
+        android:orderInCategory="100"
+        android:title="Face Detect"
+        app:showAsAction="never" />
 </menu>
