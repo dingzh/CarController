@@ -1,37 +1,57 @@
 package edu.sjtu.dean.carcontroler;
 
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.VideoView;
+import android.view.View.OnClickListener;
 
 /**
  * Created by dean on 12/12/2016.
+ * update by LinLin on 18/12/2016
  */
 
-public class VideoPlayingActivity extends AppCompatActivity {
+//add an implements
+public class VideoPlayingActivity extends AppCompatActivity  implements OnClickListener{
 
     private VideoView vv;
     private ProgressDialog progressDialog;
+
+    //add 4 buttons
+    private Button btn_up, btn_down, btn_right, btn_left;
+    private VideoPlayingActivity vpa = new VideoPlayingActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        //get the cursor for bluetooth
+        BluetoothDevice cursor = (BluetoothDevice) getIntent().getParcelableExtra("cursor");
+
+
         setContentView(R.layout.videoplay_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_playing);
         setSupportActionBar(toolbar);
         vv = (VideoView) findViewById(R.id.videoView);
+
+
+        //set Listener for button
+        vpa = this;
+        init_btn();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -100,9 +120,67 @@ public class VideoPlayingActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ExampleActivity.class);
             startActivity(intent);
             return true;
+        }else if (id == R.id.gravity_control)
+        {
+            vv.stopPlayback();
+
+            Intent intent = new Intent(this, SensorActivity.class);
+            startActivity(intent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //function belows are added by LinLin
+    //Create 4 buttons to control car
+    private void init_btn()
+    {
+        //add buttons in view
+        btn_up = (Button)findViewById(R.id.create_btn_up);
+        btn_up.setOnClickListener(this);
+
+        btn_up = (Button)findViewById(R.id.create_btn_down);
+        btn_up.setOnClickListener(this);
+
+        btn_up = (Button)findViewById(R.id.create_btn_right);
+        btn_up.setOnClickListener(this);
+
+        btn_up = (Button)findViewById(R.id.create_btn_left);
+        btn_up.setOnClickListener(this);
+    }
+
+    @Override
+    //Please add sending message by bluetooth in every case
+    public void onClick(View v)
+    {
+        switch(v.getId())
+        {
+            case R.id.create_btn_up:
+            {
+                Log.i("1","fuck up");
+                break;
+            }
+
+            case R.id.create_btn_down:
+            {
+                Log.i("1", "fuck down");
+                break;
+            }
+
+            case R.id.create_btn_right:
+            {
+                Log.i("1", "fuck right");
+                break;
+            }
+
+            case R.id.create_btn_left:
+            {
+                Log.i("1", "fuck left");
+                break;
+            }
+
+        }
     }
 }
 

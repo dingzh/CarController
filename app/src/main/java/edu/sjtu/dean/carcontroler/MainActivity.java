@@ -17,9 +17,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.bluetooth.*;
+
+import java.io.Serializable;
+import java.util.*;
+import java.lang.*;
 import edu.sjtu.dean.carcontroler.MainActivityFragment.DeviceActionListener;
+
+
+
 public class MainActivity extends AppCompatActivity
-        implements WifiP2pManager.ChannelListener, DeviceActionListener {
+        implements WifiP2pManager.ChannelListener, DeviceActionListener{
 
     public static final String TAG = "wifidirectdemo";
     private WifiP2pManager manager;
@@ -31,6 +39,9 @@ public class MainActivity extends AppCompatActivity
     private final IntentFilter intentFilter = new IntentFilter();
     private WifiP2pManager.Channel channel;
     private BroadcastReceiver receiver = null;
+
+    private BluetoothDevice mdevice;
+    public final bluetoothActivity bAction = new bluetoothActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +97,47 @@ public class MainActivity extends AppCompatActivity
                     disconnect();
                 }
 
+            }
+        });
+        //bluetooth
+        FloatingActionButton bl = (FloatingActionButton) findViewById(R.id.bl);
+        bl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+                if (mBluetoothAdapter == null){
+                    Snackbar.make(MainActivity.this.findViewById(R.id.bl),
+                            "bluetooth service not supported" , Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    return;
+                }
+
+                if (!mBluetoothAdapter.isEnabled()){
+                    mBluetoothAdapter.enable();
+                }
+
+                Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+                if (pairedDevices.size() > 0){
+                    for (BluetoothDevice device:pairedDevices){
+                        if (device.getName().equals("HC-06")){
+                            mdevice = device;
+                            Snackbar.make(MainActivity.this.findViewById(R.id.bl),
+                                    "bluetooth connected successfully" , Snackbar.LENGTH_LONG)
+                                    .setAction("Action", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            bAction.getSocket(mdevice,mBluetoothAdapter);
+                                        }
+                                    }).show();
+                        }
+                    }
+                }
+                else{
+                    Snackbar.make(MainActivity.this.findViewById(R.id.bl),
+                            "no devices found" , Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
             }
         });
     }

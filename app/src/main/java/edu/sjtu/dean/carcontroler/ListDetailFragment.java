@@ -103,6 +103,7 @@ public class ListDetailFragment extends Fragment implements WifiP2pManager.Conne
             Intent intent = new Intent(getActivity(), VideoStreamingActivity.class);
             startActivity(intent);
             // todo need to connect to bluetooth somehow
+
         }
         else if (info.groupFormed) {
             Toast.makeText(getActivity(),
@@ -110,6 +111,9 @@ public class ListDetailFragment extends Fragment implements WifiP2pManager.Conne
 
             // start playing activity
             Intent intent = new Intent(getActivity(), VideoPlayingActivity.class);
+            Bundle mbundle = new Bundle();
+            mbundle.putSerializable("cursor",((MainActivity)getActivity()).bAction);
+            intent.putExtras(mbundle);
             startActivity(intent);
 
         } else {

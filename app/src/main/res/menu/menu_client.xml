@@ -12,4 +12,10 @@
         android:orderInCategory="100"
         android:title="Example"
         app:showAsAction="never" />
+    <!--Add for gravity control-->
+    <item
+        android:id="@+id/gravity_control"
+        android:orderInCategory="100"
+        android:title="Gravity Control"
+        app:showAsAction="never" />
 </menu>

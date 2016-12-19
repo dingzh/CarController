@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\zhoud\AndroidStudioProjects\CarControler\lib\libstreaming\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="C:\Users\zhoud\AndroidStudioProjects\CarControler\lib\libstreaming\src\release\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="D:\gitFile\CarController\lib\libstreaming\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="D:\gitFile\CarController\lib\libstreaming\src\release\jniLibs"/></dataSet></merger>

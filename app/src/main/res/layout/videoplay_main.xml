@@ -36,4 +36,44 @@ tools:context="edu.sjtu.dean.carcontroler.MainActivity">
         app:srcCompat="@android:drawable/ic_media_play"
         app:backgroundTint="@color/colorPrimary" />
 
+    <!--Show 4 button in VideoPlaying activity-->
+    <Button
+        android:id="@+id/create_btn_up"
+        android:text="Up"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="150dp"
+        android:layout_marginRight="150dp"
+        android:layout_marginBottom="200dp"/>
+
+    <Button
+        android:id="@+id/create_btn_down"
+        android:text="Down"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="150dp"
+        android:layout_marginRight="150dp"
+        android:layout_marginBottom="30dp"/>
+
+    <Button
+        android:id="@+id/create_btn_right"
+        android:text="Right"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="100dp"/>
+    <Button
+        android:id="@+id/create_btn_left"
+        android:text="Left"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="250dp"
+        android:layout_marginBottom="100dp"/>
+
 </android.support.design.widget.CoordinatorLayout>
