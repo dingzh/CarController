@@ -140,7 +140,7 @@ public class UriParser {
 						if (paramValue.equalsIgnoreCase("mr")) {
 							videoApi = MediaStream.MODE_MEDIARECORDER_API;
 						} else if (paramValue.equalsIgnoreCase("mc")) {
-							videoApi = MediaStream.MODE_MEDIACODEC_API_2;
+							videoApi = MediaStream.MODE_MEDIACODEC_API;
 						}
 					}					
 				}

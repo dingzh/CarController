@@ -12,10 +12,17 @@
         android:orderInCategory="100"
         android:title="Example"
         app:showAsAction="never" />
+<<<<<<< HEAD
     <!--Add for gravity control-->
     <item
         android:id="@+id/gravity_control"
         android:orderInCategory="100"
         android:title="Gravity Control"
+=======
+    <item
+        android:id="@+id/action_facedetect"
+        android:orderInCategory="100"
+        android:title="Face Detect"
+>>>>>>> 52320ba9aa04b7f5c8e0e52d48082cbd3a940ec2
         app:showAsAction="never" />
 </menu>

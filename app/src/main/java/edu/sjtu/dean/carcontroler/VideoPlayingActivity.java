@@ -72,7 +72,7 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
 
     public  void startRtsp() {
         // group owner's address
-        String vUrl = "rtsp://192.168.49.1:7878/?h264=1500-20-1280-720&videoapi=mr";
+        String vUrl = "rtsp://192.168.49.1:7878/?h264=1500-20-1280-720&videoapi=mc";
 
         try {
             getWindow().setFormat(PixelFormat.TRANSLUCENT);
@@ -120,6 +120,7 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
             Intent intent = new Intent(this, ExampleActivity.class);
             startActivity(intent);
             return true;
+<<<<<<< HEAD
         }else if (id == R.id.gravity_control)
         {
             vv.stopPlayback();
@@ -127,6 +128,12 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
             Intent intent = new Intent(this, SensorActivity.class);
             startActivity(intent);
             return true;
+=======
+        } else if (id == R.id.action_facedetect) {
+            vv.stopPlayback();
+            Intent intent = new Intent(this, FaceDetectActivity.class);
+            startActivity(intent);
+>>>>>>> 52320ba9aa04b7f5c8e0e52d48082cbd3a940ec2
         }
 
         return super.onOptionsItemSelected(item);
