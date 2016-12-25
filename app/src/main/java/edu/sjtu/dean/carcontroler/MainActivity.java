@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     private BluetoothDevice mdevice;
     public static bluetoothActivity bAction = new bluetoothActivity();
     public static void sendInstruction(final String str) {
+        Log.i("BT try to write", str);
         bAction.threadForConnection.write(str.getBytes());
     }
 
@@ -260,6 +261,11 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, VideoPlayingActivity.class);
+            //Bundle mbundle = new Bundle();
+            //mbundle.putSerializable("cursor", ((MainActivity)getActivity()).bAction);
+            //intent.putExtras(mbundle);
+            startActivity(intent);
             return true;
         }
 

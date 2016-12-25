@@ -3,6 +3,7 @@ package edu.sjtu.dean.carcontroler;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,6 +72,8 @@ public class ConnectThread extends Thread {
     public void write(byte[] bytes) {
         try {
             mmOutStream.write(bytes);
-        } catch (IOException e) { }
+        } catch (IOException e) {
+            Log.e("BT write error", "" + e);
+        }
     }
 }

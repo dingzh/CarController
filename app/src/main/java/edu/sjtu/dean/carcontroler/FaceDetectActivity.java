@@ -507,6 +507,8 @@ public final class FaceDetectActivity extends AppCompatActivity implements Surfa
                     PointF mid = new PointF();
                     fullResults[i].getMidPoint(mid);
 
+                    
+
                     mid.x *= xScale;
                     mid.y *= yScale;
 
@@ -545,7 +547,7 @@ public final class FaceDetectActivity extends AppCompatActivity implements Surfa
 
                         if (idFace == Id) Id++;
 
-                        faces[i].setFace(idFace, mid, mid.y, mid.x, pose, System.currentTimeMillis());
+                        faces[i].setFace(idFace, mid, eyesDis, confidence, pose, System.currentTimeMillis());
 
                         faces_previous[i].set(faces[i].getId(), faces[i].getMidEye(), faces[i].eyesDistance(), faces[i].getConfidence(), faces[i].getPose(), faces[i].getTime());
 

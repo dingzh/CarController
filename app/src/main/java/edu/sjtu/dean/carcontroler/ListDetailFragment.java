@@ -110,11 +110,6 @@ public class ListDetailFragment extends Fragment implements WifiP2pManager.Conne
                     "I'm a client!", Toast.LENGTH_LONG).show();
 
             // start playing activity
-            Intent intent = new Intent(getActivity(), VideoPlayingActivity.class);
-            //Bundle mbundle = new Bundle();
-            //mbundle.putSerializable("cursor", ((MainActivity)getActivity()).bAction);
-            //intent.putExtras(mbundle);
-            startActivity(intent);
 
         } else {
             Toast.makeText(getActivity(),

@@ -32,7 +32,7 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
 
     //add 4 buttons
     private Button btn_up, btn_down, btn_right, btn_left;
-    private VideoPlayingActivity vpa = new VideoPlayingActivity();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,8 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
 
 
         //set Listener for button
-        vpa = this;
-        //init_btn();
+
+        init_btn();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +68,7 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
 
     public  void startRtsp() {
         // group owner's address
-        String vUrl = "rtsp://192.168.49.1:7878/?h264=1500-20-1280-720&videoapi=mc";
+        String vUrl = "rtsp://192.168.49.1:7878/?h264=1500-20-720-480&videoapi=mc";
 
         try {
             getWindow().setFormat(PixelFormat.TRANSLUCENT);
