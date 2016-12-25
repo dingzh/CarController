@@ -4,6 +4,7 @@ package edu.sjtu.dean.carcontroler;
  * Created by dell on 2016/12/18.
  */
 import android.bluetooth.*;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.*;
@@ -13,9 +14,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import edu.sjtu.dean.carcontroler.ConnectThread;
 
-public class bluetoothActivity implements Serializable{
+public class bluetoothActivity {
 
-    private static final long serialVersionUID = 9060527069391618394L;
     public static BluetoothAdapter mBluetoothAdapter;
     public ConnectThread threadForConnection;
     public String string = "1";
@@ -26,7 +26,9 @@ public class bluetoothActivity implements Serializable{
         mBluetoothAdapter = adapter;
         // run the thread
         threadForConnection = new ConnectThread(device,adapter);
+        Log.i("1", "after run");
         threadForConnection.run();
-        threadForConnection.write(string.getBytes());
+        //threadForConnection.write(string.getBytes());
+        Log.i("i", "after write");
     }
 }

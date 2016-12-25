@@ -39,10 +39,6 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
 
         super.onCreate(savedInstanceState);
 
-        //get the cursor for bluetooth
-        BluetoothDevice cursor = (BluetoothDevice) getIntent().getParcelableExtra("cursor");
-
-
         setContentView(R.layout.videoplay_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_playing);
         setSupportActionBar(toolbar);
@@ -51,7 +47,7 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
 
         //set Listener for button
         vpa = this;
-        init_btn();
+        //init_btn();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -165,6 +161,7 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
             case R.id.create_btn_up:
             {
                 Log.i("1","fuck up");
+                MainActivity.sendInstruction("00");
                 break;
             }
 

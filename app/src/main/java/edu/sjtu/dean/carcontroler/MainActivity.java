@@ -41,7 +41,10 @@ public class MainActivity extends AppCompatActivity
     private BroadcastReceiver receiver = null;
 
     private BluetoothDevice mdevice;
-    public final bluetoothActivity bAction = new bluetoothActivity();
+    public static bluetoothActivity bAction = new bluetoothActivity();
+    public static void sendInstruction(final String str) {
+        bAction.threadForConnection.write(str.getBytes());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
