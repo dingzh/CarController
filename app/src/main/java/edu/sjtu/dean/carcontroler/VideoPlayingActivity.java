@@ -30,8 +30,6 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
     private VideoView vv;
     private ProgressDialog progressDialog;
 
-    //add 4 buttons
-    private Button btn_up, btn_down, btn_right, btn_left;
 
 
     @Override
@@ -68,7 +66,7 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
 
     public  void startRtsp() {
         // group owner's address
-        String vUrl = "rtsp://192.168.49.1:7878/?h264=1500-20-720-480&videoapi=mc";
+        String vUrl = "rtsp://192.168.49.1:7878/?h264=2000-30-1280-720&videoapi=mc";
 
         try {
             getWindow().setFormat(PixelFormat.TRANSLUCENT);
@@ -138,18 +136,21 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
     //Create 4 buttons to control car
     private void init_btn()
     {
-        //add buttons in view
-        btn_up = (Button)findViewById(R.id.create_btn_up);
-        btn_up.setOnClickListener(this);
+        Button btn;
+        btn = (Button)findViewById(R.id.create_btn_up);
+        btn.setOnClickListener(this);
 
-        btn_up = (Button)findViewById(R.id.create_btn_down);
-        btn_up.setOnClickListener(this);
+        btn = (Button)findViewById(R.id.create_btn_down);
+        btn.setOnClickListener(this);
 
-        btn_up = (Button)findViewById(R.id.create_btn_right);
-        btn_up.setOnClickListener(this);
+        btn = (Button)findViewById(R.id.create_btn_right);
+        btn.setOnClickListener(this);
 
-        btn_up = (Button)findViewById(R.id.create_btn_left);
-        btn_up.setOnClickListener(this);
+        btn = (Button)findViewById(R.id.create_btn_left);
+        btn.setOnClickListener(this);
+
+        btn = (Button)findViewById(R.id.create_btn_stop);
+        btn.setOnClickListener(this);
     }
 
     @Override
@@ -161,25 +162,35 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
             case R.id.create_btn_up:
             {
                 Log.i("1","fuck up");
-                MainActivity.sendInstruction("00");
+                MainActivity.sendInstruction("1");
                 break;
             }
 
             case R.id.create_btn_down:
             {
                 Log.i("1", "fuck down");
+                MainActivity.sendInstruction("2");
                 break;
             }
 
             case R.id.create_btn_right:
             {
                 Log.i("1", "fuck right");
+                MainActivity.sendInstruction("3");
                 break;
             }
 
             case R.id.create_btn_left:
             {
                 Log.i("1", "fuck left");
+                MainActivity.sendInstruction("4");
+                break;
+            }
+
+            case R.id.create_btn_stop:
+            {
+                Log.i("1", "fuck stop");
+                MainActivity.sendInstruction("0");
                 break;
             }
 

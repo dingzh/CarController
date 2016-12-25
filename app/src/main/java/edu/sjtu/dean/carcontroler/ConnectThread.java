@@ -43,7 +43,9 @@ public class ConnectThread extends Thread {
         } catch (IOException connectException) {
             try {
                 mmSocket.close();
-            } catch (IOException closeException) { }
+            } catch (IOException closeException) {
+                Log.e("BT connect error", "" + closeException);
+            }
             return;
         }
 
@@ -60,6 +62,8 @@ public class ConnectThread extends Thread {
         mmInStream = tmpIn;
         mmOutStream = tmpOut;
 
+        //write(MainActivity.lastInstr.getBytes());
+
     }
 
     /** Will cancel an in-progress connection, and close the socket */
@@ -74,6 +78,7 @@ public class ConnectThread extends Thread {
             mmOutStream.write(bytes);
         } catch (IOException e) {
             Log.e("BT write error", "" + e);
+            run();
         }
     }
 }

@@ -77,8 +77,8 @@ public final class FaceDetectActivity extends AppCompatActivity implements Surfa
     private int mDisplayRotation;
     private int mDisplayOrientation;
 
-    private int previewWidth;
-    private int previewHeight;
+    public int previewWidth;
+    public int previewHeight;
 
     // The surface view for the camera data
     private SurfaceView mView;
@@ -441,6 +441,9 @@ public final class FaceDetectActivity extends AppCompatActivity implements Surfa
         private Context ctx;
         private Bitmap faceCroped;
 
+        private PointF facePoint;
+
+
         public FaceDetectThread(Handler handler, Context ctx) {
             this.ctx = ctx;
             this.handler = handler;
@@ -506,8 +509,7 @@ public final class FaceDetectActivity extends AppCompatActivity implements Surfa
                 } else {
                     PointF mid = new PointF();
                     fullResults[i].getMidPoint(mid);
-
-                    
+                    facePoint = mid;
 
                     mid.x *= xScale;
                     mid.y *= yScale;
@@ -571,6 +573,18 @@ public final class FaceDetectActivity extends AppCompatActivity implements Surfa
 
                     if (counter == (Integer.MAX_VALUE - 1000))
                         counter = 0;
+                    if (facePoint != null) {
+                        if (facePoint.x < ((float) previewWidth) * 0.4) {
+                            MainActivity.sendInstruction("3");
+                            Log.i("face dectect", "turn left");
+                        } else if (facePoint.x > ((float) previewWidth) * 0.6) {
+                            MainActivity.sendInstruction("4");
+                            Log.i("face dectect", "turn right");
+                        } else {
+                            MainActivity.sendInstruction("0");
+                            Log.i("face detector", "stop");
+                        }
+                    }
 
                     isThreadWorking = false;
                 }

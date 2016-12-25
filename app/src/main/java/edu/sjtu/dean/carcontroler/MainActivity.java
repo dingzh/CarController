@@ -42,7 +42,13 @@ public class MainActivity extends AppCompatActivity
 
     private BluetoothDevice mdevice;
     public static bluetoothActivity bAction = new bluetoothActivity();
+    public static String lastInstr = null;
     public static void sendInstruction(final String str) {
+        //if (lastInstr != null && lastInstr.equals(str)) {
+          //  return;
+        //}
+
+        lastInstr = str;
         Log.i("BT try to write", str);
         bAction.threadForConnection.write(str.getBytes());
     }
@@ -126,14 +132,10 @@ public class MainActivity extends AppCompatActivity
                     for (BluetoothDevice device:pairedDevices){
                         if (device.getName().equals("HC-06")){
                             mdevice = device;
+                            bAction.getSocket(mdevice,mBluetoothAdapter);
                             Snackbar.make(MainActivity.this.findViewById(R.id.bl),
                                     "bluetooth connected successfully" , Snackbar.LENGTH_LONG)
-                                    .setAction("Action", new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            bAction.getSocket(mdevice,mBluetoothAdapter);
-                                        }
-                                    }).show();
+                                    .setAction("Action", null).show();
                         }
                     }
                 }

@@ -15,12 +15,16 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
 
 public class SensorActivity extends Activity{
     /** Called when the activity is first created. */
     //设置LOG标签
     private static final String TAG = "sensor";
     private  SensorManager sm;
+    private Button button;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,6 @@ public class SensorActivity extends Activity{
          * 参数3 ：模式 可选数据变化的刷新频率
          * */
         sm.registerListener(myAccelerometerListener,sm.getDefaultSensor(sensorType),SensorManager.SENSOR_DELAY_NORMAL);
-
     }
 
     /*
@@ -51,15 +54,38 @@ public class SensorActivity extends Activity{
         //复写onSensorChanged方法
         public void onSensorChanged(SensorEvent sensorEvent){
             if(sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-                Log.i(TAG,"onSensorChanged");
+                // Log.i(TAG,"onSensorChanged");
 
                 //图解中已经解释三个值的含义
                 float X_lateral = sensorEvent.values[0];
                 float Y_longitudinal = sensorEvent.values[1];
                 float Z_vertical = sensorEvent.values[2];
-                Log.i(TAG,"\n heading "+X_lateral);
+
+                /*Log.i(TAG,"\n heading "+X_lateral);
                 Log.i(TAG,"\n pitch "+Y_longitudinal);
-                Log.i(TAG,"\n roll "+Z_vertical);
+                Log.i(TAG,"\n roll "+Z_vertical);*/
+
+                if(X_lateral <=4 && X_lateral >= -4 && Y_longitudinal < -4){
+                    //send signal to go ahead
+                    Log.i("1", "Go ahead");
+                    MainActivity.sendInstruction("1");
+                }else if(X_lateral <= 4 && X_lateral >= -4 && Y_longitudinal >4) {
+                    //send signal to go back
+                    Log.i("1", "Go back");
+                    MainActivity.sendInstruction("2");
+                }else if(X_lateral > 4 && Y_longitudinal >= -4 && Y_longitudinal <= 4){
+                    //send signal to turn left
+                    Log.i("1", "turn left");
+                    MainActivity.sendInstruction("3");
+                }else if(X_lateral < -4 && Y_longitudinal >= -4 && Y_longitudinal <= 4){
+                    //send signal to turn right
+                    Log.i("1", "turn right");
+                    MainActivity.sendInstruction("4");
+                } else {
+                    Log.i("1", "stop");
+                    MainActivity.sendInstruction("0");
+
+                }
             }
         }
         //复写onAccuracyChanged方法
@@ -76,4 +102,5 @@ public class SensorActivity extends Activity{
         sm.unregisterListener(myAccelerometerListener);
         super.onPause();
     }
+
 }
