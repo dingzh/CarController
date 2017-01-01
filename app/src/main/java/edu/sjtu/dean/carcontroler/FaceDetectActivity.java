@@ -503,10 +503,13 @@ public final class FaceDetectActivity extends AppCompatActivity implements Surfa
             FaceDetector.Face[] fullResults = new FaceDetector.Face[MAX_FACE];
             fdet.findFaces(bmp, fullResults);
 
+            boolean flag = false;
+
             for (int i = 0; i < MAX_FACE; i++) {
                 if (fullResults[i] == null) {
                     faces[i].clear();
                 } else {
+                    flag = true;
                     PointF mid = new PointF();
                     fullResults[i].getMidPoint(mid);
                     facePoint = mid;
@@ -528,33 +531,34 @@ public final class FaceDetectActivity extends AppCompatActivity implements Surfa
                     /**
                      * Only detect face size > 100x100
                      */
-                    if(rect.height() * rect.width() > 100 * 100) {
+                    //if(rect.height() * rect.width() > 100 * 100)
                         // Check this face and previous face have same ID?
-                        for (int j = 0; j < MAX_FACE; j++) {
-                            float eyesDisPre = faces_previous[j].eyesDistance();
-                            PointF midPre = new PointF();
-                            faces_previous[j].getMidPoint(midPre);
+                    for (int j = 0; j < MAX_FACE; j++) {
+                        float eyesDisPre = faces_previous[j].eyesDistance();
+                        PointF midPre = new PointF();
+                        faces_previous[j].getMidPoint(midPre);
 
-                            RectF rectCheck = new RectF(
-                                    (midPre.x - eyesDisPre * 1.5f),
-                                    (midPre.y - eyesDisPre * 1.15f),
-                                    (midPre.x + eyesDisPre * 1.5f),
-                                    (midPre.y + eyesDisPre * 1.85f));
+                        RectF rectCheck = new RectF(
+                                (midPre.x - eyesDisPre * 1.5f),
+                                (midPre.y - eyesDisPre * 1.15f),
+                                (midPre.x + eyesDisPre * 1.5f),
+                                (midPre.y + eyesDisPre * 1.85f));
 
-                            if (rectCheck.contains(mid.x, mid.y) && (System.currentTimeMillis() - faces_previous[j].getTime()) < 1000) {
-                                idFace = faces_previous[j].getId();
-                                break;
-                            }
+                        if (rectCheck.contains(mid.x, mid.y) && (System.currentTimeMillis() - faces_previous[j].getTime()) < 1000) {
+                            idFace = faces_previous[j].getId();
+                            break;
                         }
-
-                        if (idFace == Id) Id++;
-
-                        faces[i].setFace(idFace, mid, eyesDis, confidence, pose, System.currentTimeMillis());
-
-                        faces_previous[i].set(faces[i].getId(), faces[i].getMidEye(), faces[i].eyesDistance(), faces[i].getConfidence(), faces[i].getPose(), faces[i].getTime());
-
                     }
+
+                    if (idFace == Id) Id++;
+                    faces[i].setFace(idFace, mid, eyesDis, confidence, pose, System.currentTimeMillis());
+                    faces_previous[i].set(faces[i].getId(), faces[i].getMidEye(), faces[i].eyesDistance(), faces[i].getConfidence(), faces[i].getPose(), faces[i].getTime());
+
+                    break;
                 }
+
+                if (flag)
+                    facePoint = null;
             }
 
             handler.post(new Runnable() {

@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_retry_play"
         android:orderInCategory="100"
-        android:title="Retry"
+        android:title="Switch Camera"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_example"

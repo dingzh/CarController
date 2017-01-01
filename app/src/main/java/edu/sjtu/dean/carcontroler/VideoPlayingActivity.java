@@ -29,6 +29,7 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
 
     private VideoView vv;
     private ProgressDialog progressDialog;
+    private String vUrl = "rtsp://192.168.49.1:7878/?h264=2000-30-1280-720&videoapi=mr";
 
 
 
@@ -66,7 +67,6 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
 
     public  void startRtsp() {
         // group owner's address
-        String vUrl = "rtsp://192.168.49.1:7878/?h264=2000-30-1280-720&videoapi=mc";
 
         try {
             getWindow().setFormat(PixelFormat.TRANSLUCENT);
@@ -103,19 +103,14 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_retry_play) {
-            return true;
-        } else if (id == R.id.action_example) {
             vv.stopPlayback();
-            Intent serviceIntent = new Intent(this, MsgTransferService.class);
-            serviceIntent.setAction(MsgTransferService.ACTION_SEND_MESSAGE);
-            serviceIntent.putExtra(MsgTransferService.EXTRAS_MESSAGE, "What you want the sever know");
-            startService(serviceIntent);
-
-            Intent intent = new Intent(this, ExampleActivity.class);
-            startActivity(intent);
+            if (vUrl == "rtsp://192.168.49.1:7878/?h264=2000-30-1280-720&videoapi=mr")
+                vUrl = "rtsp://192.168.49.1:7878/?h264=2000-30-1280-720&videoapi=mr&camera=front";
+            else
+                vUrl = "rtsp://192.168.49.1:7878/?h264=2000-30-1280-720&videoapi=mr";
+            startRtsp();
             return true;
-        }else if (id == R.id.gravity_control)
-        {
+        } else if (id == R.id.gravity_control) {
             vv.stopPlayback();
 
             Intent intent = new Intent(this, SensorActivity.class);
@@ -126,7 +121,7 @@ public class VideoPlayingActivity extends AppCompatActivity  implements OnClickL
             vv.stopPlayback();
             Intent intent = new Intent(this, FaceDetectActivity.class);
             startActivity(intent);
-
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

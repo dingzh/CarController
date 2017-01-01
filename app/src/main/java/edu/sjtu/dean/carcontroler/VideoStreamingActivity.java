@@ -52,7 +52,5 @@ public class VideoStreamingActivity extends Activity {
 
 
 
-        // todo notify the client. whose ip has been set
-
     }
 }

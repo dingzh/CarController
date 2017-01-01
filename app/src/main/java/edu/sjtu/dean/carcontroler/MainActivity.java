@@ -132,6 +132,9 @@ public class MainActivity extends AppCompatActivity
                     for (BluetoothDevice device:pairedDevices){
                         if (device.getName().equals("HC-06")){
                             mdevice = device;
+                            Snackbar.make(MainActivity.this.findViewById(R.id.bl),
+                                    "Trying to connect to HC-06" , Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
                             bAction.getSocket(mdevice,mBluetoothAdapter);
                             Snackbar.make(MainActivity.this.findViewById(R.id.bl),
                                     "bluetooth connected successfully" , Snackbar.LENGTH_LONG)
